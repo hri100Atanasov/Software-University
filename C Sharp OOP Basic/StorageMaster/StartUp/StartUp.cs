@@ -1,12 +1,14 @@
-﻿using System;
+﻿using StorageMaster.Entities.Products;
+using StorageMaster.Entities.Vehicles;
+using System;
 
 namespace StorageMaster
 {
-    class StartUp
+    public class StartUp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+
         }
     }
 }
