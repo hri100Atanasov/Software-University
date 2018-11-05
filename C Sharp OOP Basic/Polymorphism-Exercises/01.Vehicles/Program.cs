@@ -6,7 +6,7 @@ namespace _01.Vehicles
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+
         }
     }
 }
