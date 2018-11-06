@@ -4,6 +4,8 @@ using StorageMaster.Entities.Storages;
 using StorageMaster.Entities.Vehicles;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace StorageMaster.Core
 {
@@ -12,7 +14,7 @@ namespace StorageMaster.Core
         private readonly ProductFactory productFactory;
         private readonly StorageFactory storageFactory;
         private readonly Dictionary<string, Storage> storageRegistry;
-        private readonly List<Product> productPool;
+        private readonly Dictionary<string, Stack<Product>> productPool;
         private Vehicle currentVehicle;
 
         public StorageMaster()
@@ -21,13 +23,18 @@ namespace StorageMaster.Core
             storageFactory = new StorageFactory();
 
             storageRegistry = new Dictionary<string, Storage>();
-            productPool = new List<Product>();
+            productPool = new Dictionary<string, Stack<Product>>();
         }
 
         public string AddProduct(string type, double price)
         {
+            if (!productPool.ContainsKey(type))
+            {
+                productPool[type] = new Stack<Product>();
+            }
+
             var product = productFactory.CreateProduct(type, price);
-            productPool.Add(product);
+            productPool[type].Push(product);
 
             return $"Added {product.GetType().Name} to pool";
         }
@@ -50,38 +57,83 @@ namespace StorageMaster.Core
 
         public string LoadVehicle(IEnumerable<string> productNames)
         {
-            foreach (var product in productNames)
+            var loadedProductsCount = 0;
+            foreach (var productName in productNames)
             {
                 if (!currentVehicle.IsFull)
                 {
                     break;
                 }
+                //check the solution without that check.
+                if (!productPool.Any() || productPool.ContainsKey(productName))
+                {
+                    throw new InvalidOperationException($"{productName} is out of stock!");
+                }
 
+                var product = productPool[productName].Pop();
+                currentVehicle.LoadProduct(product);
+                loadedProductsCount++;
 
             }
+            var productCount = productNames.Count();
 
-
-            throw new NotImplementedException();
+            return $"Loaded {loadedProductsCount}/{productCount} products into {currentVehicle.GetType().Name}";
         }
 
         public string SendVehicleTo(string sourceName, int sourceGarageSlot, string destinationName)
         {
-            throw new NotImplementedException();
+            if (!storageRegistry.ContainsKey(sourceName))
+            {
+                throw new InvalidOperationException("Invalid source storage!");
+            }
+
+            if (!storageRegistry.ContainsKey(destinationName))
+            {
+                throw new InvalidOperationException("Invalid destination storage!");
+            }
+
+            var sourceStorage = storageRegistry[sourceName];
+            var vehicle = sourceStorage.GetVehicle(sourceGarageSlot);
+            var destinationStorage = storageRegistry[destinationName];
+            var destinationGarageSlot = sourceStorage.SendVehicleTo(sourceGarageSlot, destinationStorage);
+
+            return $"Sent {vehicle.GetType().Name} to {destinationStorage.GetType().Name} (slot {destinationGarageSlot})";
         }
 
         public string UnloadVehicle(string storageName, int garageSlot)
         {
-            throw new NotImplementedException();
+            var storage = storageRegistry[storageName];
+            var vehicle = storage.GetVehicle(garageSlot);
+            var productsInVehicle = vehicle.Trunk.Count();
+            var unloadedProductsCount = storage.UnloadVehicle(garageSlot);
+
+            return $"Unloaded {unloadedProductsCount}/{productsInVehicle} products at {storageName}";
         }
 
         public string GetStorageStatus(string storageName)
         {
+            var storage = storageRegistry[storageName];
+            var storageProductsCount = storage.Products.Count();
+
+
+
             throw new NotImplementedException();
         }
 
         public string GetSummary()
         {
-            throw new NotImplementedException();
+            var sortedStorageRegistry = storageRegistry.Values.OrderByDescending(s => s.Products.Sum(p => p.Price)).ToList();
+
+            var sb = new StringBuilder();
+
+            foreach (var storage in sortedStorageRegistry)
+            {
+                sb.AppendLine($"{storage.Name}:");
+                var totalMoney = storage.Products.Sum(p => p.Price);
+                sb.AppendLine($"Storage worth: ${totalMoney:F2}");
+            }
+
+            return sb.ToString().TrimEnd('\r', '\n');
         }
     }
 }
