@@ -50,7 +50,15 @@ namespace StorageMaster.Core
 
         public string LoadVehicle(IEnumerable<string> productNames)
         {
+            foreach (var product in productNames)
+            {
+                if (!currentVehicle.IsFull)
+                {
+                    break;
+                }
 
+
+            }
 
 
             throw new NotImplementedException();
