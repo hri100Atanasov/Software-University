@@ -16,9 +16,10 @@ namespace StorageMaster.Entities.Vehicles
         public bool IsFull => Trunk.Sum(p => p.Weight) >= Capacity;
         public bool IsEmpty => !Trunk.Any();
 
-        public Vehicle(int capacity)
+        protected Vehicle(int capacity)
         {
             Capacity = capacity;
+            trunk = new List<Product>();
         }
 
         public void LoadProduct(Product product)
