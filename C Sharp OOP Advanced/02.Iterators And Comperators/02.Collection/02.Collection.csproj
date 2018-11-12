@@ -3,8 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <RootNamespace>Lab</RootNamespace>
-    <AssemblyName>Lab</AssemblyName>
+    <RootNamespace>_02.Collection</RootNamespace>
   </PropertyGroup>
 
 </Project>

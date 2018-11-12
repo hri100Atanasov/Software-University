@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace _01.ListyIterator
+namespace _02.Collection
 {
     class Program
     {
@@ -34,9 +34,15 @@ namespace _01.ListyIterator
                     case "HasNext":
                         Console.WriteLine(listIterator.HasNext());
                         break;
-                    default:
-                        throw new ArgumentException();
-                }   
+                    case "PrintAll":
+                        foreach (var item in listIterator)
+                        {
+                            Console.Write(item + " ");
+                        }
+
+                        Console.WriteLine();
+                        break;
+                }
             }
         }
     }
