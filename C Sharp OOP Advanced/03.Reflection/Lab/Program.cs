@@ -1,12 +1,24 @@
 ﻿using System;
 
-namespace Lab
+
+public class Program
 {
-    class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
+        var spy = new Spy();
+
+        //Gets the fields values.
+        //var result = spy.StealFieldInfo("Hacker", "username", "password");
+        //Console.WriteLine(result);
+
+        //Analyzes the access modifiers.
+        //var result = spy.AnalyzeAcessModifiers("Hacker");
+        //Console.WriteLine(result);
+
+        //Gets all the private methods
+
+        var result = spy.RevealPrivateMethods("Hacker");
+        Console.WriteLine(result);
     }
 }
+
