@@ -67,5 +67,30 @@ public class Spy
 
         return sb.ToString().Trim();
     }
+
+    public string CollectGettersAndSetters(string className)
+    {
+        var sb = new StringBuilder();
+        var type = Type.GetType(className);
+
+        var properties = type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+        foreach (var property in properties)
+        {
+            if (property.GetMethod != null)
+            {
+                sb.AppendLine($"{property.GetMethod.Name} will return {property.GetMethod.ReturnType}");
+            }
+        }
+
+        foreach (var property in properties)
+        {
+            if (property.SetMethod != null)
+            {
+                sb.AppendLine($"{property.SetMethod.Name} will set field of {property.SetMethod.GetParameters().First().ParameterType}");
+            }
+        }
+
+        return sb.ToString().Trim();
+    }
 }
 

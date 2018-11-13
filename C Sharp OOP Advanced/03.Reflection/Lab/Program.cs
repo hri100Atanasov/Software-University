@@ -16,8 +16,11 @@ public class Program
         //Console.WriteLine(result);
 
         //Gets all the private methods
+        //var result = spy.RevealPrivateMethods("Hacker");
+        //Console.WriteLine(result);
 
-        var result = spy.RevealPrivateMethods("Hacker");
+        //Gets all getters and setters only.
+        var result = spy.CollectGettersAndSetters("Hacker");
         Console.WriteLine(result);
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Lab
+﻿using System;
+
+namespace Lab
 {
     class TestReflection
     {
