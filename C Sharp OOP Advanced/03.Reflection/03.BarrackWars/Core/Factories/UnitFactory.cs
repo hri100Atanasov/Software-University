@@ -22,7 +22,7 @@
                 throw new ArgumentException($"{unitType} is not a valid unit type");
             }
 
-            IUnit unit = (IUnit)Activator.CreateInstance(model, true);
+            IUnit unit = (IUnit)Activator.CreateInstance(model);
 
             return unit;
         }

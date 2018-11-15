@@ -35,7 +35,6 @@ namespace StorageMaster.Entities.Factories
             if (!typeof(Product).IsAssignableFrom(model))
             {
                 throw new InvalidOperationException("Invalid product type!");
-
             }
 
             try

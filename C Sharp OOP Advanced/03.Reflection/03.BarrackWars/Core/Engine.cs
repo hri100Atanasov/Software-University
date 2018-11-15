@@ -1,7 +1,9 @@
 ﻿namespace _03BarracksFactory.Core
 {
-    using System;
     using Contracts;
+    using System;
+    using System.Linq;
+    using System.Reflection;
 
     class Engine : IRunnable
     {
@@ -13,7 +15,7 @@
             this.repository = repository;
             this.unitFactory = unitFactory;
         }
-        
+
         public void Run()
         {
             while (true)
@@ -37,38 +39,66 @@
         private string InterpredCommand(string[] data, string commandName)
         {
             string result = string.Empty;
-            switch (commandName)
+
+            Assembly assembly = Assembly.GetCallingAssembly();
+            Type commandType = assembly.GetTypes().FirstOrDefault(t => t.Name.ToLower() == commandName + "command");
+
+            if (commandType == null || !typeof(IExecutable).IsAssignableFrom(commandType))
             {
-                case "add":
-                    result = this.AddUnitCommand(data);
-                    break;
-                case "report":
-                    result = this.ReportCommand(data);
-                    break;
-                case "fight":
-                    Environment.Exit(0);
-                    break;
-                default:
-                    throw new InvalidOperationException("Invalid command!");
+                throw new ArgumentException("Invalid command!");
             }
+
+            if (!typeof(IExecutable).IsAssignableFrom(commandType))
+            {
+                throw new ArgumentException($"{commandType} is not a valid command!");
+            }
+
+            object[] ctorArgs = new object[] { data, repository, unitFactory };
+            object instance = Activator.CreateInstance(commandType, ctorArgs);
+            MethodInfo method = typeof(IExecutable).GetMethods().First();
+            try
+            {
+            result = (string)method.Invoke(instance, null);
+            }
+            catch (TargetInvocationException e)
+            {
+                throw e.InnerException;
+            }
+
+            //Replaced with reflection
+            //switch (commandName)
+            //{
+            //    case "add":
+            //        result = this.AddUnitCommand(data);
+            //        break;
+            //    case "report":
+            //        result = this.ReportCommand(data);
+            //        break;
+            //    case "fight":
+            //        Environment.Exit(0);
+            //        break;
+            //    default:
+            //        throw new InvalidOperationException("Invalid command!");
+            //}
+
             return result;
         }
 
+        //Replaced with reflection
+        //private string ReportCommand(string[] data)
+        //{
+        //    string output = this.repository.Statistics;
+        //    return output;
+        //}
 
-        private string ReportCommand(string[] data)
-        {
-            string output = this.repository.Statistics;
-            return output;
-        }
-
-
-        private string AddUnitCommand(string[] data)
-        {
-            string unitType = data[1];
-            IUnit unitToAdd = this.unitFactory.CreateUnit(unitType);
-            this.repository.AddUnit(unitToAdd);
-            string output = unitType + " added!";
-            return output;
-        }
+        //Replaced with reflection
+        //private string AddUnitCommand(string[] data)
+        //{
+        //    string unitType = data[1];
+        //    IUnit unitToAdd = this.unitFactory.CreateUnit(unitType);
+        //    this.repository.AddUnit(unitToAdd);
+        //    string output = unitType + " added!";
+        //    return output;
+        //}
     }
 }

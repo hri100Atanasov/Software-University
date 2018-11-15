@@ -43,7 +43,14 @@
         public void RemoveUnit(string unitType)
         {
             //TODO: implement for Problem 4
-            throw new NotImplementedException();
+            if (amountOfUnits[unitType]>0)
+            {
+                amountOfUnits[unitType]--;
+            }
+            else
+            {
+                throw new InvalidOperationException("No units left to retire!");
+            }
         }
     }
 }
