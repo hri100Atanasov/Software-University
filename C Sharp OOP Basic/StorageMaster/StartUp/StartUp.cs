@@ -9,12 +9,11 @@ namespace StorageMaster
     {
         static void Main(string[] args)
         {
-            //IWriter writer = new ConsoleWriter();
-            //IReader reader = new ConsoleReader();
+            IWriter writer = new ConsoleWriter();
+            IReader reader = new ConsoleReader();
 
-            //var engine = new Engine(reader, writer);
-            //engine.Run();
-            System.Console.WriteLine(typeof(Semi));
+            var engine = new Engine(reader, writer);
+            engine.Run();
         }
     }
 }
