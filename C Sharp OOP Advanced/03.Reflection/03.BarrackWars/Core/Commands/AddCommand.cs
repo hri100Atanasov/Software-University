@@ -1,14 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using _03BarracksFactory.Contracts;
+﻿using _03BarracksFactory.Contracts;
 
 namespace _03.BarrackWars.Core.Commands
 {
     public class AddCommand : Command
     {
-        public AddCommand(string[] data, IRepository repository, IUnitFactory unitFactory) : base(data, repository, unitFactory)
+        [Inject]
+        private IRepository repository;
+        [Inject]
+        private IUnitFactory unitFactory;
+
+        public AddCommand(string[] data, IRepository repository, IUnitFactory unitFactory) : base(data)
         {
+            Repository = repository;
+            UnitFactory = unitFactory;
         }
 
         public override string Execute()
@@ -18,6 +22,18 @@ namespace _03.BarrackWars.Core.Commands
             Repository.AddUnit(unitToAdd);
             string output = unitType + " added!";
             return output;
+        }
+
+        protected IRepository Repository
+        {
+            get { return repository; }
+            private set { repository = value; }
+        }
+
+        protected IUnitFactory UnitFactory
+        {
+            get { return unitFactory; }
+            private set { unitFactory = value; }
         }
     }
 }

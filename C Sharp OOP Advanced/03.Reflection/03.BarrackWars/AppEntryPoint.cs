@@ -1,17 +1,28 @@
-﻿using _03BarracksFactory.Contracts;
+﻿using _03.BarrackWars.Core;
+using _03BarracksFactory.Contracts;
 using _03BarracksFactory.Core;
 using _03BarracksFactory.Core.Factories;
 using _03BarracksFactory.Data;
-using _03BarracksFactory.Models.Units;
-using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+
 
 public class AppEntryPoint
 {
     static void Main(string[] args)
     {
-        IRepository repository = new UnitRepository();
-        IUnitFactory unitFactory = new UnitFactory();
-        IRunnable engine = new Engine(repository, unitFactory);
+        IServiceProvider serviceProvider = ConfigureService();
+        ICommandInterpreter commandInterpreter = new CommandInterpreter(serviceProvider);
+        IRunnable engine = new Engine(commandInterpreter);
         engine.Run();
+    }
+
+    private static IServiceProvider ConfigureService()
+    {
+        IServiceCollection services = new ServiceCollection();
+        services.AddTransient<IUnitFactory, UnitFactory>();
+        services.AddSingleton<IRepository, UnitRepository>();
+        IServiceProvider serviceProvider = services.BuildServiceProvider();
+        return serviceProvider;
     }
 }

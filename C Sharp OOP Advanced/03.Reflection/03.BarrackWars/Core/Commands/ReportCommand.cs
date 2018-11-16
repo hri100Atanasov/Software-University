@@ -1,14 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using _03BarracksFactory.Contracts;
+﻿using _03BarracksFactory.Contracts;
 
 namespace _03.BarrackWars.Core.Commands
 {
-   public class ReportCommand : Command
+    public class ReportCommand : Command
     {
-        public ReportCommand(string[] data, IRepository repository, IUnitFactory unitFactory) : base(data, repository, unitFactory)
+        [Inject]
+        private IRepository repository;
+        public ReportCommand(string[] data, IRepository repository) : base(data)
         {
+            Repository = repository;
+        }
+
+        public IRepository Repository
+        {
+            get { return repository; }
+            set { repository = value; }
         }
 
         public override string Execute()

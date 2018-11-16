@@ -27,7 +27,7 @@ namespace StorageMaster.Entities.Factories
                 .GetTypes()
                 .FirstOrDefault(t => typeof(Vehicle).IsAssignableFrom(t) && !t.IsAbstract && t.Name == type);
 
-            if (factoryType==null)
+            if (factoryType == null)
             {
                 throw new InvalidOperationException("Invalid vehicle type!");
             }

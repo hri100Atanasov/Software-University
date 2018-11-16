@@ -1,13 +1,10 @@
-﻿using _03BarracksFactory.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace _03.BarrackWars.Core.Commands
 {
     class FightCommand : Command
     {
-        public FightCommand(string[] data, IRepository repository, IUnitFactory unitFactory) : base(data, repository, unitFactory)
+        public FightCommand(string[] data) : base(data)
         {
         }
 
