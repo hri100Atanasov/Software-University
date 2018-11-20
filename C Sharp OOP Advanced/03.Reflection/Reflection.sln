@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01.HarvestingFields", "01.H
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabCustomAttribute", "LabCustomAttribute\LabCustomAttribute.csproj", "{9D201C46-9066-41B6-B57A-ACFB3988ED93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02.BlackBox", "02.BlackBox\02.BlackBox.csproj", "{92EAEFEE-3018-48B1-BD91-EC6718119F88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02.BlackBox", "02.BlackBox\02.BlackBox.csproj", "{92EAEFEE-3018-48B1-BD91-EC6718119F88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03.BarrackWars", "03.BarrackWars\03.BarrackWars.csproj", "{BE237E4C-7DA2-4199-B4B0-E65E3E1A2EDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03.BarrackWars", "03.BarrackWars\03.BarrackWars.csproj", "{BE237E4C-7DA2-4199-B4B0-E65E3E1A2EDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04.TrafficLight", "04.TrafficLight\04.TrafficLight.csproj", "{1E12CAB5-7900-4325-AD68-0A6A37B6BC0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{BE237E4C-7DA2-4199-B4B0-E65E3E1A2EDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE237E4C-7DA2-4199-B4B0-E65E3E1A2EDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE237E4C-7DA2-4199-B4B0-E65E3E1A2EDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E12CAB5-7900-4325-AD68-0A6A37B6BC0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E12CAB5-7900-4325-AD68-0A6A37B6BC0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E12CAB5-7900-4325-AD68-0A6A37B6BC0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E12CAB5-7900-4325-AD68-0A6A37B6BC0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
