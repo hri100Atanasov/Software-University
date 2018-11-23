@@ -6,7 +6,21 @@ namespace _01.Database
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            try
+            {
+                var database = new Database();
+                var a = database.Fetch();
+                Console.WriteLine(a.Length);
+                Console.WriteLine(string.Join(" ", a));
+                database.Add(null);
+                database.Remove();
+                var ba = database.Fetch();
+                Console.WriteLine(string.Join(" ", ba));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }
