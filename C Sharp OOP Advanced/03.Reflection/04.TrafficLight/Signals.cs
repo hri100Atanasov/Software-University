@@ -1,6 +1,6 @@
 ﻿namespace _04.TrafficLight
 {
-    public enum Signals
+    public enum Signals : byte
     {
         Red,
         Green,

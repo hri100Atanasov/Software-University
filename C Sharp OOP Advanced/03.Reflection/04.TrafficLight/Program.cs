@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace _04.TrafficLight
 {
@@ -6,25 +8,30 @@ namespace _04.TrafficLight
     {
         static void Main(string[] args)
         {
-            var three = 3;
             var input = Console.ReadLine().Split();
-            var currentSignal = input[2];
+            var trafficLights = new TrafficLight[input.Length];
+
+            for (int i = 0; i < trafficLights.Length; i++)
+            {
+                trafficLights[i] = (TrafficLight)Activator.CreateInstance(typeof(TrafficLight), new object[] { input[i] });
+            }
+
+
             var count = int.Parse(Console.ReadLine());
-            var generatedSignal = new string[3];
 
-
-            while (three-- > 0)
+            for (int i = 0; i < count; i++)
             {
-                var index = 0;
-                Console.WriteLine(Enum.GetName(typeof(Signals), currentSignal));
-                index++;
-            }
+                List<string> result = new List<string>();
 
-            foreach (var item in generatedSignal)
-            {
-                Console.WriteLine(item);
-            }
+                foreach (var trafficLight in trafficLights)
+                {
+                    trafficLight.Update();
+                    var field = typeof(TrafficLight).GetField("currentSignal", BindingFlags.NonPublic | BindingFlags.Instance);
+                    result.Add(field.GetValue(trafficLight).ToString());
+                }
 
+                Console.WriteLine(string.Join(" ", result));
+            }
         }
     }
 }
