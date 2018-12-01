@@ -23,18 +23,11 @@ INSERT INTO Towns (
 	Id,
 	[Name]
 	)
-VALUES (
-	1,
-	'Sofia'
-	),
-	(
-	2,
-	'Plovdiv'
-	),
-	(
-	3,
-	'Varna'
-	)
+VALUES 
+(1, 'Sofia'), 
+(2, 'Plovdiv'), 
+(3, 'Varna')
+
 
 INSERT INTO Minions (
 	Id,
@@ -42,24 +35,11 @@ INSERT INTO Minions (
 	Age,
 	TownId
 	)
-VALUES (
-	1,
-	'Kevin',
-	22,
-	1
-	),
-	(
-	2,
-	'Bob',
-	15,
-	3
-	),
-	(
-	3,
-	'Steward',
-	DEFAULT,
-	2
-	)
+VALUES 
+(1, 'Kevin', 22, 1), 
+(2, 'Bob', 15, 3), 
+(3, 'Steward', DEFAULT, 2)
+
 
 --5
 TRUNCATE TABLE Minions
@@ -90,51 +70,13 @@ INSERT INTO People (
 	Birthdate,
 	Biography
 	)
-VALUES (
-	'Iko',
-	195.88,
-	NULL,
-	85,
-	'm',
-	'1800-12-01',
-	'LifePro'
-	),
-	(
-	'Tiko',
-	195.88,
-	NULL,
-	85,
-	'm',
-	'1800-12-01',
-	'LifePro'
-	),
-	(
-	'Piko',
-	195.88,
-	NULL,
-	85,
-	'm',
-	'1800-12-01',
-	'LifePro'
-	),
-	(
-	'Miko',
-	195.88,
-	NULL,
-	85,
-	'm',
-	'1800-12-01',
-	'LifePro'
-	),
-	(
-	'Riko',
-	195.88,
-	NULL,
-	85,
-	'm',
-	'1800-12-01',
-	'LifePro'
-	)
+VALUES 
+('Iko', 195.88, NULL, 85, 'm', '1800-12-01', 'LifePro'), 
+('Tiko', 195.88, NULL, 85, 'm', '1800-12-01', 'LifePro'), 
+('Piko', 195.88, NULL, 85, 'm', '1800-12-01', 'LifePro'), 
+('Miko', 195.88, NULL, 85, 'm', '1800-12-01', 'LifePro'), 
+('Riko', 195.88, NULL, 85, 'm', '1800-12-01', 'LifePro')
+
 
 --8
 CREATE TABLE Users (
@@ -153,41 +95,13 @@ INSERT INTO Users (
 	LastLoginTime,
 	IsDeleted
 	)
-VALUES (
-	'Ziko',
-	'12345',
-	NULL,
-	NULL,
-	0
-	),
-	(
-	'Viko',
-	'12345',
-	NULL,
-	NULL,
-	1
-	),
-	(
-	'Miko',
-	'12345',
-	NULL,
-	NULL,
-	0
-	),
-	(
-	'Kiko',
-	'12345',
-	NULL,
-	NULL,
-	0
-	),
-	(
-	'Biko',
-	'12345',
-	NULL,
-	NULL,
-	1
-	)
+VALUES 
+('Ziko', '12345', NULL, NULL, 0), 
+('Viko', '12345', NULL, NULL, 1), 
+('Miko', '12345', NULL, NULL, 0), 
+('Kiko', '12345', NULL, NULL, 0), 
+('Biko', '12345', NULL, NULL, 1)
+
 
 --9
 ALTER TABLE Users
@@ -407,3 +321,120 @@ VALUES
 (3, 3, 1, 80, 157000, 159000, '2018-05-01', '2018-05-11', 59.99, 1)
 
 --15
+CREATE DATABASE Hotel
+
+CREATE TABLE Employees (
+	Id INT PRIMARY KEY IDENTITY,
+	FirstName NVARCHAR(100) NOT NULL,
+	LastName NVARCHAR(100) NOT NULL,
+	Title NVARCHAR(50),
+	Notes NVARCHAR(500)
+	)
+
+CREATE TABLE Customers (
+	AccountNumber INT PRIMARY KEY IDENTITY,
+	FirstName NVARCHAR(100) NOT NULL,
+	LastName NVARCHAR(100) NOT NULL,
+	PhoneNumber NVARCHAR(50),
+	EmergencyName NVARCHAR(100),
+	EmergencyNumber NVARCHAR(50),
+	Notes NVARCHAR(500)
+	)
+
+CREATE TABLE RoomStatus (
+	RoomStatus NVARCHAR(50) PRIMARY KEY NOT NULL,
+	Notes NVARCHAR(500)
+	)
+
+CREATE TABLE RoomTypes (
+	RoomType NVARCHAR(50) PRIMARY KEY NOT NULL,
+	Notes NVARCHAR(500)
+	)
+
+CREATE TABLE BedTypes (
+	BedType NVARCHAR(50) PRIMARY KEY NOT NULL,
+	Notes NVARCHAR(500)
+	)
+
+CREATE TABLE Rooms (
+	RoomNumber INT PRIMARY KEY NOT NULL,
+	RoomType NVARCHAR(50) FOREIGN KEY REFERENCES RoomTypes(RoomType),
+	BedType NVARCHAR(50) FOREIGN KEY REFERENCES BedTypes(BedType),
+	Rate DECIMAL(15, 2) NOT NULL,
+	RoomStatus NVARCHAR(50) FOREIGN KEY REFERENCES RoomStatus(RoomStatus),
+	Notes NVARCHAR(500)
+	)
+
+CREATE TABLE Payments (
+	Id INT PRIMARY KEY IDENTITY,
+	EmployeeId INT FOREIGN KEY REFERENCES Employees(Id) NOT NULL,
+	PaymentDate DATETIME2 DEFAULT GETDATE(),
+	AccountNumber INT FOREIGN KEY REFERENCES Customers(AccountNumber) NOT NULL,
+	FirstDateOccupied DATETIME2 NOT NULL,
+	LastDateOccupied DATETIME2 NOT NULL,
+	TotalDays AS DATEDIFF(DAY, FirstDateOccupied, LastDateOccupied),
+	AmountCharged DECIMAL(15, 2) NOT NULL,
+	TaxRate DECIMAL(15, 2),
+	TaxAmount AS AmountCharged * TaxRate,
+	PaymentTotal AS AmountCharged + AmountCharged * TaxRate,
+	Notes NVARCHAR(500)
+	)
+
+CREATE TABLE Occupancies (
+	Id INT PRIMARY KEY IDENTITY,
+	EmployeeId INT FOREIGN KEY REFERENCES Employees(Id) NOT NULL,
+	DateOccupied DATETIME2 DEFAULT GETDATE(),
+	AccountNumber INT FOREIGN KEY REFERENCES Customers(AccountNumber) NOT NULL,
+	RoomNumber INT FOREIGN KEY REFERENCES Rooms(RoomNumber) NOT NULL,
+	RateApplied DECIMAL(15, 2) NOT NULL,
+	PhoneCharge DECIMAL(15, 2) NOT NULL,
+	Notes NVARCHAR(500)
+	)
+
+INSERT INTO Employees(FirstName, LastNAme) 
+VALUES
+('Galin', 'Zhelev'),
+('Stoyan', 'Ivanov'),
+('Petar', 'Ikonomov')
+
+INSERT INTO Customers(FirstName, LastName, PhoneNumber) 
+VALUES
+('Monio', 'Ushev', '+359888666555'),
+('Gancho', 'Stoykov', '+359866444222'),
+('Genadi', 'Dimchov', '+35977555333')
+
+INSERT INTO RoomStatus(RoomStatus) 
+VALUES
+('occupied'),
+('non occupied'),
+('repairs')
+
+INSERT INTO RoomTypes(RoomType) 
+VALUES
+('single'),
+('double'),
+('appartment')
+
+INSERT INTO BedTypes(BedType) 
+VALUES
+('single'),
+('double'),
+('couch')
+
+INSERT INTO Rooms(RoomNumber, RoomType, BedType, Rate, RoomStatus) 
+VALUES
+(201, 'single', 'single', 40.0, 'occupied'),
+(205, 'double', 'double', 70.0, 'occupied'),
+(208, 'appartment', 'double', 110.0, 'repairs')
+
+INSERT INTO Payments(EmployeeId, PaymentDate, AccountNumber, FirstDateOccupied, LastDateOccupied, AmountCharged, TaxRate) 
+VALUES
+(1, '2011-11-25', 2, '2017-11-30', '2017-12-04', 250.0, 0.2),
+(3, '2014-06-03', 3, '2014-06-06', '2014-06-09', 340.0, 0.2),
+(3, '2016-02-25', 2, '2016-02-27', '2016-03-04', 500.0, 0.2)
+
+INSERT INTO Occupancies(EmployeeId, DateOccupied, AccountNumber, RoomNumber, RateApplied, PhoneCharge) 
+VALUES
+(2, '2011-02-04', 3, 205, 70.0, 12.54),
+(2, '2015-04-09', 1, 201, 40.0, 11.22),
+(3, '2012-06-08', 2, 208, 110.0, 10.05)
