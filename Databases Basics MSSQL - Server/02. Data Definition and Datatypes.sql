@@ -275,3 +275,135 @@ INSERT INTO Movies VALUES
 ('Little Cow', 2, 2007, '1:35:55', 3, 3, 2.3, 'Agro'),
 ('Smoked Almonds', 5, 2013, '2:22:25', 4, 2, 7.8, 'Whiskey in the Jar'),
 ('I''m very mad!', 4, 2018, '1:30:02', 5, 1, 9.9, 'Rating 10 not supported')
+
+--14
+CREATE DATABASE CarRental
+
+CREATE TABLE Categories (
+	Id INT PRIMARY KEY IDENTITY,
+	CategoryName VARCHAR(50) NOT NULL,
+	DailyRate DECIMAL(15, 2) NOT NULL,
+	WeeklyRate DECIMAL(15, 2) NOT NULL,
+	MonthlyRate DECIMAL(15, 2) NOT NULL,
+	WeekendRate DECIMAL(15, 2) NOT NULL,
+	)
+
+
+CREATE TABLE Cars (
+	Id INT PRIMARY KEY IDENTITY,
+	PlateNumber NVARCHAR(20) UNIQUE NOT NULL,
+	Manufacturer NVARCHAR(100) NOT NULL,
+	Model NVARCHAR(100) NOT NULL,
+	CarYear SMALLINT NOT NULL,
+	CategoryId INT FOREIGN KEY REFERENCES Categories(Id),
+	Doors SMALLINT DEFAULT 4,
+	Picture VARBINARY(MAX),
+	Condition NVARCHAR(500) NOT NULL,
+	Avaliable BIT NOT NULL,
+	)
+
+CREATE TABLE Employees (
+	Id INT PRIMARY KEY IDENTITY,
+	FirstName NVARCHAR(100) NOT NULL,
+	LastName NVARCHAR(100) NOT NULL,
+	Title NVARCHAR(100) NOT NULL,
+	Notes NVARCHAR(MAX)
+	)
+
+CREATE TABLE Customers (
+	Id INT PRIMARY KEY IDENTITY,
+	DriverLicenseNumber NVARCHAR(50) UNIQUE NOT NULL,
+	FullName NVARCHAR(200) NOT NULL,
+	[Address] NVARCHAR(200) NOT NULL,
+	City NVARCHAR(100) NOT NULL,
+	ZipCode NVARCHAR(60) NOT NULL,
+	Notes NVARCHAR(MAX)
+	)
+
+CREATE TABLE RentalOrders (
+	Id INT PRIMARY KEY IDENTITY,
+	EmployeeId INT FOREIGN KEY REFERENCES Employees(Id),
+	CustomerId INT FOREIGN KEY REFERENCES Customers(Id),
+	CarId INT FOREIGN KEY REFERENCES Cars(Id),
+	TankLevel INT NOT NULL,
+	KilometrageStart INT NOT NULL,
+	KilometrageEnd INT NOT NULL,
+	TotalKilometrage AS KilometrageEnd - KilometrageStart,
+	StartDate DATETIME NOT NULL,
+	EndDate DATETIME NOT NULL,
+	TotalDays AS DATEDIFF(DAY, StartDate, EndDate),
+	RateApplied DECIMAL NOT NULL,
+	TaxRate AS RateApplied * 0.2,
+	OrderStatus NVARCHAR(50) NOT NULL,
+	Notes NVARCHAR(500)
+	)
+
+INSERT INTO Categories (
+	CategoryName,
+	DailyRate,
+	WeeklyRate,
+	MonthlyRate,
+	WeekendRate
+	)
+VALUES
+
+('Luxory', 59.99, 350, 1200, 150),
+('SUV', 50, 200, 900, 100),
+('Van', 59.99, 350, 1200, 150)
+
+INSERT INTO Cars (
+	PlateNumber,
+	Manufacturer,
+	Model,
+	CarYear,
+	CategoryId,
+	Doors,
+	Picture,
+	Condition,
+	Avaliable
+	)
+
+VALUES
+('PB0001', 'Opel', 'Insignia',2015, 1, 4, NULL, 'Old', 1),
+('PB0002', 'Mercedes', 'V-class', 2018, 1, 4, NULL, 'New', 1),
+('PB0003', 'BMW', '7', 2005, 1, 4, NULL, 'Old', 1)
+
+INSERT INTO EMPLOYEES(FirstName, LastName, Title, Notes)
+VALUES
+('Tiko', 'Pkiov', 'Mechanic', 'Experienced worker'),
+('Tiko', 'Pkiov', 'Mechanic', 'QA'),
+('Tiko', 'Pkiov', 'Mechanic', NULL)
+
+INSERT INTO Customers (
+	DriverLicenseNumber,
+	FullName,
+	[Address],
+	City,
+	ZipCode,
+	Notes
+	)
+VALUES
+
+('AZ18555PO', 'Bat Pesho', 'This str. 25', 'Chikago', '4000', NULL),
+('AZ1855PO', 'Bat Gosho', 'That str. 25', 'Chikago', '4000', NULL),
+('AZ18555P', 'Bat Tosho', 'Those str. 25', 'Chikago', '4000', NULL)
+
+INSERT INTO RentalOrders (
+	EmployeeId,
+	CustomerId,
+	CarId,
+	TankLevel,
+	KilometrageStart,
+	KilometrageEnd,
+	StartDate,
+	EndDate,
+	RateApplied,
+	OrderStatus
+	)
+VALUES
+
+(1, 1, 3, 80, 150000, 155000, '2018-05-01', '2018-05-11', 59.99, 1),
+(2, 2, 2, 80, 156000, 157000, '2018-05-01', '2018-05-11', 59.99, 1),
+(3, 3, 1, 80, 157000, 159000, '2018-05-01', '2018-05-11', 59.99, 1)
+
+--15
