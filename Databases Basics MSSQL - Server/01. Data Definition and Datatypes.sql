@@ -467,11 +467,79 @@ CREATE TABLE Employees (
 	DepartmentId INT FOREIGN KEY REFERENCES Departments(Id) NOT NULL,
 	HireDate DATE DEFAULT GETDATE(),
 	Salary DECIMAL(15, 2) NOT NULL,
-	AddressId INT FOREIGN KEY REFERENCES Addresses(Id) NOT NULL
+	AddressId INT FOREIGN KEY REFERENCES Addresses(Id)
 	)
-
+ 
 --17
 BACKUP DATABASE SoftUni
 TO DISK ='C:\Users\softuni-backup.bak'
 
 --18
+INSERT INTO Towns([Name])
+VALUES
+('Sofia'),
+('Plovdiv'),
+('Varna'),
+('Burgas')
+
+INSERT INTO Departments([Name])
+VALUES
+('Engineering'), 
+('Sales'), 
+('Marketing'), 
+('Software Development'), 
+('Quality Assurance')
+
+INSERT INTO Employees(FirstName, MiddleName, LastName, JobTitle, DepartmentId, HireDate, Salary)
+VALUES
+('Ivan', 'Ivanov', 'Ivanov', '.NET Developer', 4, '2013-02-01', 3500),
+('Petar', 'Petrov', 'Petrov', 'Senior Engineer', 1, '2004-03-02', 4000),
+('Maria', 'Petrova', 'Ivanova', 'Intern', 5, '2016-08-28', 525.25),
+('Georgi', 'Terziev', 'Ivanov', 'CEO', 2, '2007-09-12', 3000),
+('Peter', 'Pan', 'Pan', 'Intern', 3, '2016-08-28', 599.88)
+
+--19
+SELECT * FROM Towns
+SELECT * FROM Departments
+SELECT * FROM Employees
+
+--20
+SELECT * FROM Towns
+ORDER BY [Name]
+SELECT * FROM Departments
+ORDER BY [Name]
+SELECT * FROM Employees
+ORDER BY Salary DESC
+
+--21
+SELECT [Name]
+FROM Towns
+ORDER BY [Name]
+
+SELECT [Name]
+FROM Departments
+ORDER BY [Name]
+
+SELECT [FirstName],
+	[LastName],
+	[JobTitle],
+	[Salary]
+FROM Employees
+ORDER BY Salary DESC
+
+--22
+UPDATE Employees
+SET Salary = Salary * 1.1
+
+SELECT Salary
+FROM Employees
+
+--23
+UPDATE Payments
+SET TaxRate -= TaxRate*0.03
+
+SELECT TaxRate
+FROM Payments
+
+--24
+TRUNCATE TABLE Occupancies
