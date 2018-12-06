@@ -22,6 +22,7 @@ namespace _01._IntroductionToEntityFramework.Data
         public virtual DbSet<EmployeesProject> EmployeesProjects { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<Town> Towns { get; set; }
+        public object Where { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
