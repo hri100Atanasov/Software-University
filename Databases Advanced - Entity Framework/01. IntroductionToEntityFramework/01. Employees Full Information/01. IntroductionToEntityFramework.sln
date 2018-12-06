@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.28307.106
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01. IntroductionToEntityFramework", "01. IntroductionToEntityFramework.csproj", "{3CE6B243-B630-4545-B122-55B747C4D5D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02. SalaryOver50", "..\02. SalaryOver50\02. SalaryOver50.csproj", "{38668370-DCF7-4C79-832E-A31282EBF232}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02. SalaryOver50", "..\02. SalaryOver50\02. SalaryOver50.csproj", "{38668370-DCF7-4C79-832E-A31282EBF232}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03. EmployeesResDev", "..\03. EmployeesResDev\03. EmployeesResDev.csproj", "{D4519816-A140-4A62-825B-B2D6C5BD8A9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{38668370-DCF7-4C79-832E-A31282EBF232}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38668370-DCF7-4C79-832E-A31282EBF232}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38668370-DCF7-4C79-832E-A31282EBF232}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4519816-A140-4A62-825B-B2D6C5BD8A9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4519816-A140-4A62-825B-B2D6C5BD8A9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4519816-A140-4A62-825B-B2D6C5BD8A9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4519816-A140-4A62-825B-B2D6C5BD8A9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
