@@ -3,7 +3,10 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <RootNamespace>_01._HospitalDataBase</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\01. Employees Full Information\01. IntroductionToEntityFramework.csproj" />
+  </ItemGroup>
 
 </Project>

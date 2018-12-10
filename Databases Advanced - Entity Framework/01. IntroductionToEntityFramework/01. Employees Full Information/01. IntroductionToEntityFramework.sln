@@ -17,15 +17,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "06.AddressesByTown", "..\06
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "07.Employee147", "..\07.Employee147\07.Employee147.csproj", "{488CD135-2B73-4246-89DC-09CD6E61B3AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "08.DepartmentsWithMoreThan5Emp", "..\10.DepartmentsWithMoreThan5Emp\08.DepartmentsWithMoreThan5Emp.csproj", "{FF12F2CF-AA24-42CF-871C-DF70FB60E91C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "08.DepartmentsWithMoreThan5Emp", "..\10.DepartmentsWithMoreThan5Emp\08.DepartmentsWithMoreThan5Emp.csproj", "{FF12F2CF-AA24-42CF-871C-DF70FB60E91C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "09.FindLatest10Projects", "..\09.FindLatest10Projects\09.FindLatest10Projects.csproj", "{525A9129-4C3D-461B-AFA8-730F6354761F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "09.FindLatest10Projects", "..\09.FindLatest10Projects\09.FindLatest10Projects.csproj", "{525A9129-4C3D-461B-AFA8-730F6354761F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "10,IncreaseSalarries", "..\10,IncreaseSalarries\10,IncreaseSalarries.csproj", "{69C44B5F-6533-4DDE-ACC6-E5FF484CC576}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "10,IncreaseSalarries", "..\10,IncreaseSalarries\10,IncreaseSalarries.csproj", "{69C44B5F-6533-4DDE-ACC6-E5FF484CC576}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "11.FindEmployeesByFirstName", "..\11.FindEmployeesByFirstName\11.FindEmployeesByFirstName.csproj", "{71453AEC-0499-474F-B436-86451401D144}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "11.FindEmployeesByFirstName", "..\11.FindEmployeesByFirstName\11.FindEmployeesByFirstName.csproj", "{71453AEC-0499-474F-B436-86451401D144}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "12.DeleteProjectById", "..\ConsoleApp1\12.DeleteProjectById.csproj", "{8309AA0D-77ED-4AD8-896A-5C7040326AA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "12.DeleteProjectById", "..\ConsoleApp1\12.DeleteProjectById.csproj", "{8309AA0D-77ED-4AD8-896A-5C7040326AA3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SelfExamples", "..\SelfTraining\SelfExamples.csproj", "{C9C21BDF-DE4F-42B3-8A2C-6C007081710D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,10 @@ Global
 		{8309AA0D-77ED-4AD8-896A-5C7040326AA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8309AA0D-77ED-4AD8-896A-5C7040326AA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8309AA0D-77ED-4AD8-896A-5C7040326AA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9C21BDF-DE4F-42B3-8A2C-6C007081710D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9C21BDF-DE4F-42B3-8A2C-6C007081710D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9C21BDF-DE4F-42B3-8A2C-6C007081710D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9C21BDF-DE4F-42B3-8A2C-6C007081710D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
