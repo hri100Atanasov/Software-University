@@ -10,8 +10,11 @@ namespace P01_BillsPaymentSystem.Data.Models
         public int CreditCardId { get; set; }
         public decimal Limit { get; set; }
         public decimal MoneyOwed { get; set; }
+
         [NotMapped]
         public decimal LimitLeft => Limit - MoneyOwed;
         public DateTime ExpirationDate { get; set; }
+
+        public PaymentMethod PaymentMethod { get; set; }
     }
 }

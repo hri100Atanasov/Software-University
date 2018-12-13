@@ -5,12 +5,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="EntitiesConfigurations\**" />
+    <EmbeddedResource Remove="EntitiesConfigurations\**" />
+    <None Remove="EntitiesConfigurations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\P01_BillsPaymentSystem.Data.Models\P01_BillsPaymentSystem.Data.Models.csproj" />
   </ItemGroup>
 
 </Project>

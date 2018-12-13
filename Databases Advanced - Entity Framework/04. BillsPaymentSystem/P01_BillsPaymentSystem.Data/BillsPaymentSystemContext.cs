@@ -1,6 +1,6 @@
-﻿using JetBrains.Annotations;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using Microsoft.EntityFrameworkCore;
+using P01_BillsPaymentSystem.Data.EntityConfig;
+using P01_BillsPaymentSystem.Data.Models;
 
 namespace P01_BillsPaymentSystem.Data
 {
@@ -10,10 +10,16 @@ namespace P01_BillsPaymentSystem.Data
         {
         }
 
-        public BillsPaymentSystemContext(DbContextOptions options) 
+        public BillsPaymentSystemContext(DbContextOptions options)
             : base(options)
         {
         }
+
+        public DbSet<User> User { get; set; }
+        public DbSet<PaymentMethod> PaymentMethod { get; set; }
+        public DbSet<CreditCard> CreditCard { get; set; }
+        public DbSet<BankAccount> BankAccount { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -25,7 +31,8 @@ namespace P01_BillsPaymentSystem.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new BankAccountConfig());
+            modelBuilder.ApplyConfiguration(new CreditCardConfig());
         }
     }
 }

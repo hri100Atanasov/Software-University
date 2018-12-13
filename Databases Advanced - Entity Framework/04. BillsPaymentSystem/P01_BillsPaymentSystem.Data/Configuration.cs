@@ -6,6 +6,6 @@ namespace P01_BillsPaymentSystem.Data
 {
     public class Configuration
     {
-        public const string configurationString = @"Server=DESKTOP-5H5JRQ7\SQLEXPRESS;Database=PaymentSystemDatabase;Trusted Security=True";
+        public const string configurationString = @"Server=DESKTOP-5H5JRQ7\SQLEXPRESS;Database=PaymentSystemDatabase;Integrated Security=True";
     }
 }
